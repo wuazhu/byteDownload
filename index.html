@@ -144,7 +144,7 @@
       </div>
       <div class="py3 d-grid gap-2 d-md-flex justify-content-md-end">
         <button v-if="tabSelected == 1" type="button" class="btn btn-primary" :disabled="!links">
-          <a :href="`http://127.0.0.1:9010/download?url=${encodeURIComponent(links)}`" target="_blank" class="text-white">下载视频</a> 
+          <a :href="`http://119.96.144.158:30341/download?url=${encodeURIComponent(links)}`" target="_blank" class="text-white">下载视频</a> 
         </button>
         <button v-if="tabSelected == 2" type="button" class="btn btn-primary" :disabled="!links" @click="searchProfile">搜索抖音主页</button>
         <button v-if="tabSelected == 3" type="button" class="btn btn-primary" :disabled="!links" @click="searchTkProfile">搜索TK主页</button>
@@ -171,8 +171,8 @@
             <div class="card-body">
               <h5 class="card-title"><img :src="item.author.avatar_thumb.url_list[0]" class="avatar rounded mr-2" alt="" srcset=""> <strong class="ml-4">{{item.author.nickname}}</strong></h5>
               <p class="card-text">{{item.desc}}</p>
-              <a v-if="tabSelected == 2" :href="`http://127.0.0.1:9010/video/${item.aweme_id}`" download="ship" class="btn btn-primary">下载视频</a>
-              <a v-if="tabSelected == 3" :href="`http://127.0.0.1:9010/@${item.author.unique_id}/video/${item.aweme_id}`" download="ship" class="btn btn-primary">下载视频</a>
+              <a v-if="tabSelected == 2" :href="`http://119.96.144.158:30341/video/${item.aweme_id}`" download="ship" class="btn btn-primary">下载视频</a>
+              <a v-if="tabSelected == 3" :href="`http://119.96.144.158:30341/@${item.author.unique_id}/video/${item.aweme_id}`" download="ship" class="btn btn-primary">下载视频</a>
               
             </div>
           </div>
@@ -222,7 +222,7 @@
       searchTkProfile() {
         const _this = this
         _this.loading = true
-        $.ajax(`http://127.0.0.1:80/api/tiktok_profile/?url=${this.links}`, {
+        $.ajax(`/api/tiktok_profile/?url=${this.links}`, {
           method: "get",
         }).done(function (res) {
           console.log('请求来的数据', res);
@@ -239,7 +239,7 @@
       searchProfile() {
         const _this = this
         _this.loading = true
-        $.ajax(`http://127.0.0.1:80/api/douyin_profile/?url=${this.links}`, {
+        $.ajax(`/api/douyin_profile/?url=${this.links}`, {
           method: "get",
         }).done(function (res) {
           console.log('请求来的数据', res);

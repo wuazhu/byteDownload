@@ -38,25 +38,25 @@ async function getToken() {
 }
 
 // 视频信息
-router.get('/api/video_data', async (ctx) => {
-  ctx.set('Access-Control-Allow-Origin',"*")
-  ctx.set('status', 200)
-  const {url} = ctx.request.query;
-  let _reqUrl = ''
-  if (url.includes('douyin.com')) {
-    _reqUrl = `/douyin_video_data?douyin_video_url=${url}`
-  }
-  if (url.includes('tiktok.com')) {
-    _reqUrl = `/tiktok_video_data/?tiktok_video_url=${url}`
-  }
-  const d = await axios({
-    baseURL: 'http://localhost:9010',
-    method: 'get',
-    url: `${_reqUrl}`,
-  })
-  console.log('看看是啥', d.data);
-  ctx.body = d.data
-})
+// router.get('/api/video_data', async (ctx) => {
+//   ctx.set('Access-Control-Allow-Origin',"*")
+//   ctx.set('status', 200)
+//   const {url} = ctx.request.query;
+//   let _reqUrl = ''
+//   if (url.includes('douyin.com')) {
+//     _reqUrl = `/douyin_video_data?douyin_video_url=${url}`
+//   }
+//   if (url.includes('tiktok.com')) {
+//     _reqUrl = `/tiktok_video_data/?tiktok_video_url=${url}`
+//   }
+//   const d = await axios({
+//     baseURL: 'http://localhost:9010',
+//     method: 'get',
+//     url: `${_reqUrl}`,
+//   })
+//   console.log('看看是啥', d.data);
+//   ctx.body = d.data
+// })
 
 
 // 请求数据
