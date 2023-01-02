@@ -60,90 +60,90 @@ async function getToken() {
 
 
 // 请求数据
-router.get('/api/douyin_profile', async (ctx) => {
-  const {url} = ctx.request.query;
-  let awemeList = {}
-  let headers = {
-    'Authorization': '',
-    'Accept-Encoding': '*'
-  }
+// router.get('/api/douyin_profile', async (ctx) => {
+//   const {url} = ctx.request.query;
+//   let awemeList = {}
+//   let headers = {
+//     'Authorization': '',
+//     'Accept-Encoding': '*'
+//   }
   
-  const _token = await getToken()
-  token = _token.data
-  headers.Authorization = `Bearer ${token.access_token}`
-  const userProfile = await axios({
-    baseURL: 'https://api-v2.douyin.wtf',
-    method: 'get',
-    headers,
-    url: `/douyin_profile_videos/?douyin_profile_url=${url}&cursor=0&count=40`,
-  })
-  console.log('用户数据', userProfile.data);
-  async function getMoreData({next_url, has_more}) {
-    if (has_more && next_url) {
-      const {data} =  await axios({
-        method: 'get',
-        headers,
-        url: next_url
-      })
+//   const _token = await getToken()
+//   token = _token.data
+//   headers.Authorization = `Bearer ${token.access_token}`
+//   const userProfile = await axios({
+//     baseURL: 'https://api-v2.douyin.wtf',
+//     method: 'get',
+//     headers,
+//     url: `/douyin_profile_videos/?douyin_profile_url=${url}&cursor=0&count=40`,
+//   })
+//   console.log('用户数据', userProfile.data);
+//   async function getMoreData({next_url, has_more}) {
+//     if (has_more && next_url) {
+//       const {data} =  await axios({
+//         method: 'get',
+//         headers,
+//         url: next_url
+//       })
 
-      if (data && data.status == 'success') {
-        awemeList.aweme_list = awemeList.aweme_list.concat(data.aweme_list)
-        if (data.has_more && data.next_url) {
-          await getMoreData(data)
-        }
-      }
-    }
-  }
-  if (userProfile && userProfile.data && userProfile.data.status == 'success') {
-    awemeList = userProfile.data
-    await getMoreData(userProfile.data)
-  } else {
-    awemeList = userProfile.data
-  }
-  ctx.body = awemeList
-})
+//       if (data && data.status == 'success') {
+//         awemeList.aweme_list = awemeList.aweme_list.concat(data.aweme_list)
+//         if (data.has_more && data.next_url) {
+//           await getMoreData(data)
+//         }
+//       }
+//     }
+//   }
+//   if (userProfile && userProfile.data && userProfile.data.status == 'success') {
+//     awemeList = userProfile.data
+//     await getMoreData(userProfile.data)
+//   } else {
+//     awemeList = userProfile.data
+//   }
+//   ctx.body = awemeList
+// })
 
 // 搜索tk用户主页
-router.get('/api/tiktok_profile', async (ctx) => {
-  const {url} = ctx.request.query;
-  let awemeList = {}
-  let headers = {
-    'Authorization': '',
-    'Accept-Encoding': '*'
-  }
+// router.get('/api/tiktok_profile', async (ctx) => {
+//   const {url} = ctx.request.query;
+//   let awemeList = {}
+//   let headers = {
+//     'Authorization': '',
+//     'Accept-Encoding': '*'
+//   }
   
-  const _token = await getToken()
-  token = _token.data
-  headers.Authorization = `Bearer ${token.access_token}`
-  const userProfile = await axios({
-    baseURL: 'https://api-v2.douyin.wtf',
-    method: 'get',
-    headers,
-    url: `/tiktok_profile_videos/?tiktok_video_url=${url}&cursor=0&count=40`,
-  })
-  console.log('用户数据', JSON.stringify(userProfile.data));
-  async function getMoreData({next_url, has_more}) {
-    if (has_more && next_url) {
-      const {data} =  await axios({
-        method: 'get',
-        headers,
-        url: next_url
-      })
+//   const _token = await getToken()
+//   token = _token.data
+//   headers.Authorization = `Bearer ${token.access_token}`
+//   const userProfile = await axios({
+//     baseURL: 'https://api-v2.douyin.wtf',
+//     method: 'get',
+//     headers,
+//     url: `/tiktok_profile_videos/?tiktok_video_url=${url}&cursor=0&count=40`,
+//   })
+//   console.log('用户数据', JSON.stringify(userProfile.data));
+//   async function getMoreData({next_url, has_more}) {
+//     if (has_more && next_url) {
+//       const {data} =  await axios({
+//         method: 'get',
+//         headers,
+//         url: next_url
+//       })
 
-      if (data && data.status == 'success') {
-        awemeList.aweme_list = awemeList.aweme_list.concat(data.aweme_list)
-        if (data.has_more && data.next_url) {
-          await getMoreData(data)
-        }
-      }
-    }
-  }
-  if (userProfile && userProfile.data && userProfile.data.status == 'success') {
-    awemeList = userProfile.data
-    await getMoreData(userProfile.data)
-  }
-  ctx.body = awemeList
-})
+//       if (data && data.status == 'success') {
+//         awemeList.aweme_list = awemeList.aweme_list.concat(data.aweme_list)
+//         if (data.has_more && data.next_url) {
+//           await getMoreData(data)
+//         }
+//       }
+//     }
+//   }
+//   if (userProfile && userProfile.data && userProfile.data.status == 'success') {
+//     awemeList = userProfile.data
+//     await getMoreData(userProfile.data)
+//   }
+//   ctx.body = awemeList
+// })
 
 // 验证码
 router.get('/api/code', async (ctx) => {
